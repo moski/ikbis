@@ -129,6 +129,32 @@ module Ikbis
         return send_request(options)
       end ## end function
       
+      #######################################################
+      # setTitle
+      #   -> Set the title of a video (overwrites previous title) 
+      # Parameters
+      #   * int video_id (required) - Set the title of this video.
+      #   * string title (required) - The new title. 128 is the max length for this field, any longer and it will be trimmed.
+      #
+      # ex:   getThumbnailUrl(video_id , {:how => 'json'})
+      #
+      # Returns:
+      #   ->  <rsp>ok</rsp>
+      # Authentication
+      #   ->    Authentication is required.
+      ######################
+      # @Created : DEC/31/2007
+      # @LastRefactor : DEC/31/2007
+      # @Author  : Monther Abushaikh <abushaikh@gmail.com>
+      #######################################################
+      def setTitle(video_id  , title ,options = {})
+        options.merge!(:what => "ikbis.videos.setTitle")
+        options.merge!(:how => 'xml') unless options.has_key?(:how)
+        options.merge!(:video_id => video_id)
+        options.merge!(:title => CGI.escape(title))
+        return send_request(options)
+      end
+      
     end ## end video
   end ## end Advanced
 end ## end ikbis

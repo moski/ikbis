@@ -12,7 +12,7 @@ module Ikbis
         get("videos/#{channel}/#{response}")
       end
 
-      def subscribers(channel, response'xml')
+      def subscribers(channel, response='xml')
         get("subscribers/#{channel}/#{response}")
       end
     end

@@ -96,7 +96,7 @@ module Ikbis
       #   -> Get a thumbnail URL for a given photo/size
       # 
       # Parameters
-      #   * int video_id (required) - Get information from this video
+      #   * int photo_id (required) - Get information from this video
       #   * thumbnail_size: 
       #           small        "70x70"   and  crop => "1:1"
       #           thumb        "90x90"   and  crop => "1:1"
@@ -126,6 +126,33 @@ module Ikbis
         options.merge!(:photo_id => photo_id)
         return send_request(options)
       end ## end function
+      
+      
+      #######################################################
+      # ikbis.photos.setTitle
+      #   -> Set the title of a photo (overwrites previous title) 
+      # Parameters
+      #   * int photo (required) - Set the title of this photo.
+      #   * string title (required) - The new title. 128 is the max length for this field, any longer and it will be trimmed.
+      #
+      # ex:   setTitle(photo_id , "My cool new title" ,{:how => 'json'})
+      #
+      # Returns:
+      #   ->  <rsp>ok</rsp>
+      # Authentication
+      #   ->    Authentication is required.
+      ######################
+      # @Created : DEC/31/2007
+      # @LastRefactor : DEC/31/2007
+      # @Author  : Monther Abushaikh <abushaikh@gmail.com>
+      #######################################################
+      def setTitle(photo_id  , title ,options = {})
+        options.merge!(:what => "ikbis.photos.setTitle")
+        options.merge!(:how => 'xml') unless options.has_key?(:how)
+        options.merge!(:photo_id => photo_id)
+        options.merge!(:title => CGI.escape(title))
+        return send_request(options)
+      end
       
       
     end ## end class
