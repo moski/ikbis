@@ -1,11 +1,13 @@
 require 'rubygems'
 require 'httparty'
 require 'cgi'
+
+require 'oauth/consumer'
+require 'yaml'
  
 $:.unshift(File.dirname(__FILE__))
 require 'ikbis/simple'
-#require 'ikbis/advanced'
+require 'ikbis/advanced'
  
 module Ikbis
-  
 end

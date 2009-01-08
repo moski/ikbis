@@ -1,6 +1,5 @@
 module Ikbis
   module Simple
-    
     class User < Ikbis::Simple::Base
       # Returns this user's information.
       def self.info(username)
