@@ -47,16 +47,58 @@ module Ikbis
       end ## end function.
       
       
+      #######################################################
+      # getInfo
+      #   -> Get all kinds of information about a video
+      #   -> If the calling user is logged in, this will return information 
+      #   -> that calling user has access to (including private videos).
+      #   -> If the calling user is not authenticated, this will only return 
+      #      public information, or a permission denied error if none is available.
+      # Parameters
+      #   * int video_id (required) - Get information from this video
+      #
+      # ex:   getInfo('moski_doski' , {:how => 'json'}) 
+      #
+      # Returns:
+      #   -> <video>
+      #         <id>110774</id>
+      #         <title> the reason</title>
+      #         <caption>\r\nthe reason\r\n</caption>
+      #         <views>136</views>  
+      #         <category></category>  
+      #         <owner>moski_doski</owner> 
+      #         <comments>0</comments> 
+      #         <rating>0</rating>
+      #         <thumbnails>
+      #           <small>http://shots.ikbis.com/video_thumbnail/110774/small/video.jpg</small>\n        
+      #           <thumb>http://shots.ikbis.com/video_thumbnail/110774/thumb/video.jpg</thumb>\n    
+      #           <medium_crop>http://shots.ikbis.com/video_thumbnail/110774/medium_crop/video.jpg</medium_crop>
+      #           ..........
+      #         </thumbnails>          
+      #      </video>
+      #
+      # Authentication
+      #   ->    Authentication is not required.
+      ######################
+      # @Created : DEC/31/2007
+      # @LastRefactor : DEC/31/2007
+      # @Author  : Monther Abushaikh <abushaikh@gmail.com>
+      #######################################################
+      def getInfo(video_id  , options = {})
+        options.merge!(:what => "ikbis.videos.getInfo")
+        options.merge!(:how => 'xml') unless options.has_key?(:how)
+        options.merge!(:video_id => video_id)
+        return send_request(options)
+      end ## end function
       
       
-      
-      
-      
-      
-      
-      
-      
-      
+    
+      def getThumbnailUrl(video_id  , options = {})
+        options.merge!(:what => 'ikbis.videos.getThumbnailUrl')
+        options.merge!(:how => 'xml') unless options.has_key?(:how)
+        options.merge!(:video_id => video_id)
+        return send_request(options)
+      end
       
     end ## end video
   end ## end Advanced
