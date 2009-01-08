@@ -90,6 +90,44 @@ module Ikbis
         options.merge!(:photo_id => photo_id)
         return send_request(options)
       end ## end function
+      
+      #######################################################
+      # getThumbnailUrl
+      #   -> Get a thumbnail URL for a given photo/size
+      # 
+      # Parameters
+      #   * int video_id (required) - Get information from this video
+      #   * thumbnail_size: 
+      #           small        "70x70"   and  crop => "1:1"
+      #           thumb        "90x90"   and  crop => "1:1"
+      #           medium_crop  "144x144" and  crop => "1:1"
+      #           medium       "240x240" and  no crop
+      #           screen       "420x420" and  no crop
+      #           big_screen   "500x500" and no crop
+      #           large        "800x800" and no crop
+      #           all          return all sizes
+      # Returns:
+      #   ->   <thumbnails>
+      #           <small>http://shots.ikbis.com/video_thumbnail/110774/small/video.jpg</small>\n        
+      #           <thumb>http://shots.ikbis.com/video_thumbnail/110774/thumb/video.jpg</thumb>\n    
+      #           <medium_crop>http://shots.ikbis.com/video_thumbnail/110774/medium_crop/video.jpg</medium_crop>
+      #           ..........
+      #       </thumbnails>
+      # Authentication
+      #   ->    Authentication is not required.
+      ######################
+      # @Created : DEC/31/2007
+      # @LastRefactor : DEC/31/2007
+      # @Author  : Monther Abushaikh <abushaikh@gmail.com>
+      #######################################################
+      def getThumbnailUrl(photo_id  , options = {})
+        options.merge!(:what => 'ikbis.photos.getThumbnailUrl')
+        options.merge!(:how => 'xml') unless options.has_key?(:how)
+        options.merge!(:photo_id => photo_id)
+        return send_request(options)
+      end ## end function
+      
+      
     end ## end class
   end ## end Advanced
 end ## end ikbis
