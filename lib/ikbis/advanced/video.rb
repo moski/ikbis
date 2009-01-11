@@ -155,6 +155,32 @@ module Ikbis
         return send_request(options)
       end
       
+      
+      #######################################################
+      # setCaption
+      #   -> Set a new caption for a video (overwrites previous caption)
+      # Parameters
+      #   * int video_id (required) - Set the title of this video.
+      #   * string caption (required) - The new caption.
+      # Returns:
+      #   ->  <rsp>ok</rsp>
+      # Authentication
+      #   ->    Authentication is required.
+      ######################
+      # @Created : DEC/31/2007
+      # @LastRefactor : DEC/31/2007
+      # @Author  : Monther Abushaikh <abushaikh@gmail.com>
+      #######################################################
+      def setCaption(video_id  , caption ,options = {})
+        options.merge!(:what => "ikbis.videos.setCaption")
+        options.merge!(:how => 'xml') unless options.has_key?(:how)
+        options.merge!(:video_id => video_id)
+        options.merge!(:caption => CGI.escape(caption))
+        return send_request(options)
+      end
+      
+      
+      
     end ## end video
   end ## end Advanced
 end ## end ikbis

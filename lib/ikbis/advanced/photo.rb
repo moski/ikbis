@@ -154,6 +154,28 @@ module Ikbis
         return send_request(options)
       end
       
+      #######################################################
+      # setCaption
+      #   -> Set a new caption for a photo (overwrites previous caption)
+      # Parameters
+      #   * int photo_id (required) - Set the title of this photo.
+      #   * string caption (required) - The new caption.
+      # Returns:
+      #   ->  <rsp>ok</rsp>
+      # Authentication
+      #   ->    Authentication is required.
+      ######################
+      # @Created : DEC/31/2007
+      # @LastRefactor : DEC/31/2007
+      # @Author  : Monther Abushaikh <abushaikh@gmail.com>
+      #######################################################
+      def setCaption(photo_id  , caption ,options = {})
+        options.merge!(:what => "ikbis.photos.setCaption")
+        options.merge!(:how => 'xml') unless options.has_key?(:how)
+        options.merge!(:photo_id => photo_id)
+        options.merge!(:caption => CGI.escape(caption))
+        return send_request(options)
+      end
       
     end ## end class
   end ## end Advanced
