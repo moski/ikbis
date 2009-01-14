@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+ 
+require 'rubygems'
+require 'oauth/consumer'
+require 'yaml'
+ 
+puts "Please enter your client key, then hit Return."
+consumer_key = gets.chomp
+puts "Please enter your client secret, then hit Return."
+consumer_secret = gets.chomp
+ 
+begin
+  consumer = OAuth::Consumer.new consumer_key, consumer_secret, { :site => "https://www.ikbis.com" }
+  request_token = consumer.get_request_token
+  puts "Please go to:\n#{request_token.authorize_url}\nin your browser. Click Authorize on that page.\nHit Return here when you are done."
+  gets
+  access_token = request_token.get_access_token
+  credentials = {
+    :consumer_key => consumer.key,
+    :consumer_secret => consumer.secret,
+    :access_token => access_token.token,
+    :access_token_secret => access_token.secret
+  }
+  begin
+    File.open('ikbis.yml', 'w') { |file| YAML.dump(credentials, file) }
+    File.chmod(0600, 'ikbis.yml')
+    puts "Your credentials have been saved."
+  rescue
+    puts "Couldn't save your credentials."
+  end
+rescue
+  puts "Couldn't authorize with Ikbis. Did you enter your client credentials correctly?"
+end
