@@ -2,42 +2,41 @@ module Ikbis
   module Simple
 
     class User < Ikbis::Simple::Base
-      base_uri 'ikbis.com/api/user'
 
       def self.info(username, response='xml')
-        get("/info/#{username}/#{response}")
+        get("/user/info/#{username}/#{response}")
       end
 
-      def self.videos(username, response='xml')
-        get("/videos/#{username}/#{response}")
+      def self.videos(username, response='xml', page=1)
+        get("/user/videos/#{username}/#{response}?page=#{page}")
       end
 
-      def self.photos(username, response='xml')
-        get("/photos/#{username}/#{response}")
+      def self.photos(username, response='xml', page=1)
+        get("/user/photos/#{username}/#{response}?page=#{page}")
       end
 
-      def self.medias(username, response='xml')
-        get("/medias/#{username}/#{response}")
+      def self.medias(username, response='xml', page=1)
+        get("/user/medias/#{username}/#{response}?page=#{page}")
       end
 
       def self.favorites(username, response='xml')
-        get("/favorites/#{username}/#{response}")
+        get("/user/favorites/#{username}/#{response}")
       end
 
-      def self.albums(username, response='xml')
-        get("/albums/#{username}/#{response}")
+      def self.albums(username, response='xml', page=1)
+        get("/user/albums/#{username}/#{response}?page=#{page}")
       end
 
       def self.channels(username, response='xml')
-        get("/channels/#{username}/#{response}")
+        get("/user/channels/#{username}/#{response}")
       end
 
-      def self.conctacts(username, response='xml')
-        get("/conctacts/#{username}/#{response}")
+      def self.contacts(username, response='xml')
+        get("/user/contacts/#{username}/#{response}")
       end
 
-      def self.conctacts_medias(username, response='xml')
-        get("/conctacts_medias/#{username}/#{response}")
+      def self.contacts_medias(username, response='xml')
+        get("/user/contacts_medias/#{username}/#{response}")
       end
     end
   end
