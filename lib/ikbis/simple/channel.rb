@@ -2,18 +2,17 @@ module Ikbis
   module Simple
 
     class Channel < Ikbis::Simple::Base
-      base_uri 'ikbis.com/api/channel'
 
-      def info(channel, response='xml')
-        get("info/#{channel}/#{response}")
+      def self.info(channel, response='xml')
+        get("/channel/info/#{channel}/#{response}")
       end
 
-      def videos(channel, response='xml')
-        get("videos/#{channel}/#{response}")
+      def self.videos(channel, response='xml', page=1)
+        get("/channel/videos/#{channel}/#{response}?page=#{page}")
       end
 
-      def subscribers(channel, response='xml')
-        get("subscribers/#{channel}/#{response}")
+      def self.subscribers(channel, response='xml')
+        get("/channel/subscribers/#{channel}/#{response}")
       end
     end
   end
