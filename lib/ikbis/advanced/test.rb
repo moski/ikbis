@@ -2,7 +2,7 @@ module Ikbis
   module Advanced
     
     class Test < Ikbis::Advanced::Base
-      def test_echo(options={})
+      def echo(options={})
          options.merge!(:what => "ikbis.test.echo")
          options.merge!(:how => 'xml') unless options.has_key?(:how)
          response = @access_token.post('/api/rest' , options)
@@ -24,7 +24,7 @@ module Ikbis
       # @LastRefactor : DEC/31/2007
       # @Author  : Monther Abushaikh <abushaikh@gmail.com>
       #######################################################
-      def test_login(options = {})
+      def login(options = {})
         options.merge!(:what => "ikbis.test.login")
         options.merge!(:how => "xml") unless options.has_key?(:how)
         return send_request(options)
@@ -40,7 +40,7 @@ module Ikbis
       # @LastRefactor : DEC/31/2007
       # @Author  : Monther Abushaikh <abushaikh@gmail.com>
       #######################################################
-      def test_ping(options = {})
+      def ping(options = {})
         options.merge!(:what => "ikbis.test.ping")
         options.merge!(:how => 'xml') unless options.has_key?(:how)
         return send_request(options)
