@@ -1,6 +1,30 @@
-## Advance API
-	There are two steps you'll need to do to authenticate your application to ikbis. First, you'll need to register your application with ikbis. Log in to ikbis as the user under whose account the messages should appear. Then go to http://ikbis.com/api/manage_keys . You will be asked to describe your application. Fill out the form and submit it. This will provide you with a client key and secret. Make note of them as you will need them for the next step.
+# Ikbis Advance
 
-	Then, you'll need to do the OAuth exchange, which will give you an access token and secret. Open up a terminal and run:
+## Description
+	TODO
 
-	    ikbis-auth
+## Installation
+
+ikbis is delivered as a RubyGem:
+
+    sudo gem install ikbis
+
+## Usage
+
+There are two steps you'll need to do to authenticate your application to Ikbis. First, you'll need to register your application with Ikbis. Log in to Ikbis as the user under whose account the messages should appear. Then go to http://ikbis.com/api/manage_keys. You will be asked to describe your application. Fill out the form and submit it. This will provide you with a client key and secret. Make note of them as you will need them for the next step.
+
+Then, you'll need to do the OAuth exchange, which will give you an access token and secret. Open up a terminal and run:
+
+    ikbis-auth
+
+This will prompt you for the client key and secret you just obtained. It will then echo a URL which you will need to visit while still logged in to Ikbis as the user from the previous step. You'll be asked to authorize your application. Click the Authorize button, then go back to your terminal and hit Return. The script will then get the access token and secret from Ikbis, and store all four pieces of information in a file called ikbis.yml. **Don't lose this file!** It constitutes the credentials that you will need to do anything useful with Ikbis. It is not encrypted, so keep it secure. Once you have the ikbis.yml file, you will not need to do these steps again unless you de-authorize the application.
+
+## License
+
+Copyright (C) 2008 Ikbis (http://www.ikbis.com/)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
