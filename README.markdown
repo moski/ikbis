@@ -62,8 +62,14 @@ The wrapper for the Advanced API consists of the following classes and methods:
   	ping(options={})
   	login(options={})
 
-
-
+### Ikbis::Advanced::Video
+	
+	getUploadedList(username  , {:how => 'json'})		
+	getInfo(video_id  , {:how => 'ruby'})
+	getThumbnailUrl(video_id  , {:how => 'xml'})
+	setTitle(video_id  , title , {:how => 'php'})			## Must call oauth_authentication before use
+	setCaption(video_id  , caption , {})					## Must call oauth_authentication before use
+	
 
 ## Thanks to
 
