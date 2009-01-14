@@ -1,13 +1,26 @@
+# Ikbis API GEM
+	This gem implements a full-featured ruby interface for the Ikbis API.
+
+
+## Installation
+If you haven't already, add github's gem server to your sources:
+
+  gem sources -a http://gems.github.com
+
+Then, it's as easy as:
+
+    sudo gem install ikbis
+
+Add the gem plugin to your Rails project by adding the following to your @environment.rb@ file:
+	
+	config.gem "ikbis", :lib => "ikbis"
+	
+
 # Ikbis Advance
+
 
 ## Description
 	TODO
-
-## Installation
-
-ikbis is delivered as a RubyGem:
-
-    sudo gem install ikbis
 
 ## Usage
 
@@ -18,6 +31,14 @@ Then, you'll need to do the OAuth exchange, which will give you an access token 
     ikbis-auth
 
 This will prompt you for the client key and secret you just obtained. It will then echo a URL which you will need to visit while still logged in to Ikbis as the user from the previous step. You'll be asked to authorize your application. Click the Authorize button, then go back to your terminal and hit Return. The script will then get the access token and secret from Ikbis, and store all four pieces of information in a file called ikbis.yml. **Don't lose this file!** It constitutes the credentials that you will need to do anything useful with Ikbis. It is not encrypted, so keep it secure. Once you have the ikbis.yml file, you will not need to do these steps again unless you de-authorize the application.
+
+
+
+## Thanks to
+
+* {Jeweler}[http://github.com/technicalpickles/jeweler/tree/master]: The best for gems.
+* {HTTParty}[http://github.com/jnunemaker/httparty/tree/master].
+
 
 ## License
 
