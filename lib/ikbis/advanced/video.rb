@@ -1,6 +1,19 @@
 module Ikbis
   module Advanced
-    class Video < Ikbis::Advanced::Base
+    class Video < Ikbis::Advanced::Media
+      
+      #######################################################
+      # Set the class extention string for this class.
+      ######################
+      # @Created : Jan/19/2009
+      # @LastRefactor : Jan/19/2009
+      # @Author  : Moski
+      #######################################################
+      def initialize
+         @class_extention = "ikbis.videos"
+         super ### call the media initialize function.
+      end
+      
       
       #######################################################
       # getUploadedList
@@ -35,16 +48,11 @@ module Ikbis
       # Authentication
       #   ->    Authentication is not required.
       ######################
-      # @Created : DEC/31/2007
-      # @LastRefactor : DEC/31/2007
-      # @Author  : Monther Abushaikh <abushaikh@gmail.com>
+      # @Created : Jan/19/2009
+      # @LastRefactor : Jan/19/2009
+      # @Author  : Moski
       #######################################################
-      def getUploadedList(username  , options = {})
-        options.merge!(:what => "ikbis.videos.getUploadedList")
-        options.merge!(:how => 'xml') unless options.has_key?(:how)
-        options.merge!(:username => CGI.escape(username))
-        return send_request(options)
-      end ## end function.
+      ### Auto-generated using method_missing ####
       
       
       #######################################################
@@ -55,7 +63,7 @@ module Ikbis
       #   -> If the calling user is not authenticated, this will only return 
       #      public information, or a permission denied error if none is available.
       # Parameters
-      #   * int video_id (required) - Get information from this video
+      #   * int media_id (required) - Get information from this video
       #
       # ex:   getInfo('moski_doski' , {:how => 'json'}) 
       #
@@ -80,24 +88,19 @@ module Ikbis
       # Authentication
       #   ->    Authentication is not required.
       ######################
-      # @Created : DEC/31/2007
-      # @LastRefactor : DEC/31/2007
-      # @Author  : Monther Abushaikh <abushaikh@gmail.com>
+      # @Created : Jan/19/2009
+      # @LastRefactor : Jan/19/2009
+      # @Author  : Moski
       #######################################################
-      def getInfo(video_id  , options = {})
-        options.merge!(:what => "ikbis.videos.getInfo")
-        options.merge!(:how => 'xml') unless options.has_key?(:how)
-        options.merge!(:video_id => video_id)
-        return send_request(options)
-      end ## end function
+      ### Auto-generated using method_missing ####
       
       
       #######################################################
-      # getThumbnailUrl(video_id)
+      # getThumbnailUrl(media_id)
       #   -> Get a thumbnail URL for a given video/size
       #   -> 
       # Parameters
-      #   * int video_id (required) - Get information from this video
+      #   * int media_id (required) - Get information from this video
       #   * thumbnail_size: 
       #           small        "70x70"   and  crop => "1:1"
       #           thumb        "90x90"   and  crop => "1:1"
@@ -106,7 +109,7 @@ module Ikbis
       #           screen       "420x420" and  no crop
       #           all          return all sizes
       #
-      # ex:   getThumbnailUrl(video_id , {:how => 'json'})
+      # ex:   getThumbnailUrl(media_id , {:how => 'json'})
       #
       # Returns:
       #   ->   <thumbnails>
@@ -118,25 +121,21 @@ module Ikbis
       # Authentication
       #   ->    Authentication is not required.
       ######################
-      # @Created : DEC/31/2007
-      # @LastRefactor : DEC/31/2007
-      # @Author  : Monther Abushaikh <abushaikh@gmail.com>
+      # @Created : Jan/19/2009
+      # @LastRefactor : Jan/19/2009
+      # @Author  : Moski
       #######################################################
-      def getThumbnailUrl(video_id  , options = {})
-        options.merge!(:what => 'ikbis.videos.getThumbnailUrl')
-        options.merge!(:how => 'xml') unless options.has_key?(:how)
-        options.merge!(:video_id => video_id)
-        return send_request(options)
-      end ## end function
+      ### Auto-generated using method_missing ####
+      
       
       #######################################################
       # setTitle
       #   -> Set the title of a video (overwrites previous title) 
       # Parameters
-      #   * int video_id (required) - Set the title of this video.
+      #   * int media_id (required) - Set the title of this video.
       #   * string title (required) - The new title. 128 is the max length for this field, any longer and it will be trimmed.
       #
-      # ex:   getThumbnailUrl(video_id , {:how => 'json'})
+      # ex:   getThumbnailUrl(media_id , {:how => 'json'})
       #
       # Returns:
       #   ->  <rsp>ok</rsp>
@@ -145,39 +144,26 @@ module Ikbis
       ######################
       # @Created : DEC/31/2007
       # @LastRefactor : DEC/31/2007
-      # @Author  : Monther Abushaikh <abushaikh@gmail.com>
+      # @Author  : Moski
       #######################################################
-      def setTitle(video_id  , title ,options = {})
-        options.merge!(:what => "ikbis.videos.setTitle")
-        options.merge!(:how => 'xml') unless options.has_key?(:how)
-        options.merge!(:video_id => video_id)
-        options.merge!(:title => CGI.escape(title))
-        return send_request(options)
-      end
-      
+      ### Auto-generated using method_missing ####
       
       #######################################################
       # setCaption
       #   -> Set a new caption for a video (overwrites previous caption)
       # Parameters
-      #   * int video_id (required) - Set the title of this video.
+      #   * int media_id (required) - Set the title of this video.
       #   * string caption (required) - The new caption.
       # Returns:
       #   ->  <rsp>ok</rsp>
       # Authentication
       #   ->    Authentication is required.
       ######################
-      # @Created : DEC/31/2007
-      # @LastRefactor : DEC/31/2007
-      # @Author  : Monther Abushaikh <abushaikh@gmail.com>
+      # @Created : Jan/19/2009
+      # @LastRefactor : Jan/19/2009
+      # @Author  : Moski
       #######################################################
-      def setCaption(video_id  , caption ,options = {})
-        options.merge!(:what => "ikbis.videos.setCaption")
-        options.merge!(:how => 'xml') unless options.has_key?(:how)
-        options.merge!(:video_id => video_id)
-        options.merge!(:caption => CGI.escape(caption))
-        return send_request(options)
-      end
+      ### Auto-generated using method_missing ####
       
       
       
