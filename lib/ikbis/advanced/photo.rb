@@ -73,7 +73,7 @@ module Ikbis
          # Parameters
          #   * int media_id (required) - Get information from this id
          #
-         # ex:   getInfo('moski_doski' , {:how => 'json'}) 
+         # ex:   getInfo('103678' , {:how => 'json'}) 
          #
          # Returns:
          #   -> <photo>\n  <id>103678</id>\n  <title>First Album</title>\n  <caption>Cool avatars</caption>\n  <views>171</views>\n          
