@@ -5,11 +5,11 @@ Gem::Specification.new do |s|
   s.version = "0.1.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Moski Doski" , "Al-Faisal El-Dajani"]
-  s.date = %q{2009-01-14}
+  s.authors = ["Moski Doski"]
+  s.date = %q{2009-01-20}
   s.description = %q{TODO}
   s.email = %q{abushaikh@gmail.com}
-  s.files = ["README.markdown", "VERSION.yml", "lib/ikbis", "lib/ikbis/advanced", "lib/ikbis/advanced/base.rb", "lib/ikbis/advanced/photo.rb", "lib/ikbis/advanced/test.rb", "lib/ikbis/advanced/video.rb", "lib/ikbis/advanced.rb", "lib/ikbis/simple", "lib/ikbis/simple/base.rb", "lib/ikbis/simple/channel.rb", "lib/ikbis/simple/photo.rb", "lib/ikbis/simple/user.rb", "lib/ikbis/simple/video.rb", "lib/ikbis/simple.rb", "lib/ikbis.rb", "test/ikbis_test.rb", "test/test_helper.rb"]
+  s.files = ["README.markdown", "VERSION.yml", "bin/ikbis-auth", "lib/ikbis", "lib/ikbis/advanced", "lib/ikbis/advanced/base.rb", "lib/ikbis/advanced/media.rb", "lib/ikbis/advanced/photo.rb", "lib/ikbis/advanced/test.rb", "lib/ikbis/advanced/video.rb", "lib/ikbis/advanced.rb", "lib/ikbis/simple", "lib/ikbis/simple/base.rb", "lib/ikbis/simple/channel.rb", "lib/ikbis/simple/photo.rb", "lib/ikbis/simple/user.rb", "lib/ikbis/simple/video.rb", "lib/ikbis/simple.rb", "lib/ikbis.rb", "test/ikbis_test.rb", "test/test_helper.rb"]
   s.homepage = %q{http://github.com/moski/ikbis}
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.1}
@@ -20,14 +20,8 @@ Gem::Specification.new do |s|
     s.specification_version = 2
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
-        s.add_dependency(%q<oauth>, [">= 0.2.7"])
-       s.add_runtime_dependency(%q<jnunemaker-httparty>, [">= 0.2.6"])
     else
-        s.add_dependency(%q<oauth>, [">= 0.2.7"])
-       s.add_runtime_dependency(%q<jnunemaker-httparty>, [">= 0.2.6"])
     end
   else
-      s.add_dependency(%q<oauth>, [">= 0.2.7"])  
-     s.add_runtime_dependency(%q<jnunemaker-httparty>, [">= 0.2.6"])
   end
 end
