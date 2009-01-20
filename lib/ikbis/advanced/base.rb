@@ -2,7 +2,7 @@ module Ikbis
   module Advanced
     class Base
       include HTTParty
-      base_uri 'dev.ikbis.com'
+      base_uri 'ikbis.com'
  
       class CouldNotLoadCredentials < Exception; end
       class CouldNotPost < Exception; end
