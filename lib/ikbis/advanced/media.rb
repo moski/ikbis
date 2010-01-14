@@ -51,63 +51,180 @@ module Ikbis
        
       protected
 
-      def getUploadedList(action_name , username , options = {})
-        setup_what_how(action_name , options)
-        options.merge!(:username => CGI.escape(username))
+
+      #######################################################
+      # Returns a sheet of all videos uploaded by user.
+      # 
+      # NOTE:
+      #   Now requires user_id instead of username.
+      #######################################################
+      # @ LastRefactor: Jan/06/2010
+      # @ Devs:
+      #     Moski
+      #     Ahmad
+      #######################################################
+      def getUploadedList(action_name , user_id, options = {})
+        setup_what_how("videos" , options)
+
+        # does not deal with medias controller, but with users instead...        
+        options.merge!(:target => "users")
+        options.merge!(:id => user_id)
+        options.merge!(:method => "get")
+        
         return send_request(options)
       end ## end function.
       
       
+      #######################################################
+      # Returns sheet of media info in specified format.
+      #######################################################
+      # @ LastRefactor: Jan/06/2010
+      # @ Devs:
+      #     Moski
+      #     Ahmad
+      #######################################################      
       def getInfo(action_name ,media_id  , options = {})
-        setup_what_how(action_name , options)
-        options.merge!(:media_id => media_id)
+        # debug
+        puts "------ getInfo routine ------"
+        puts "* action_name => #{action_name}"
+        puts "* options => #{options}"
+        puts "--------------------------------"
+        
+        # action name is empty here because info is the default
+        # GET response
+        setup_what_how("" , options)
+        options.merge!(:id => media_id)
+        options.merge!(:method => "get")
+        
         return send_request(options)
       end ## end function
       
-      
+
+
+      #######################################################
+      # Returns URL pointing to the thumbnail picture requested
+      # by size.
+      #
+      # params:
+      #   * int media_id
+      #   * string enum :size option
+      #     {
+      #      - medium_crop
+      #      - screen
+      #      - big_screen
+      #      - medium
+      #      - small
+      #      - large
+      #      - thumb
+      #     }
+      #
+      #   ex media.getThumbnailUrl("204732", :size => "large")
+      #######################################################
+      # @ LastRefactor: Jan/06/2010
+      # @ Devs:
+      #     Moski
+      #     Ahmad
+      #######################################################
       def getThumbnailUrl(action_name , media_id  , options = {})
-        setup_what_how(action_name , options)
-        options.merge!(:media_id => media_id)
-        return send_request(options)
+
+        # get vid info where thumb URIs are contained
+        media = getInfo(media_id)
+        
+        # enforce a default value if none is provided
+        size = (options[:size].empty?) ? "thumb" : options[:size]
+        
+        type = (media.type == "Image") ? "photo" : "video"
+        
+        # since HTTParty parses the XML into a ruby hash,
+        # we only need to access the element and get our URI!
+        thumb_uri = media['ikbis'][type]['thumbnails'][size]
+
+        return thumb_uri
       end ## end function
       
       
+      #######################################################
+      # Modifies title of specified media that belongs to the logged
+      # in user.
+      #######################################################
+      # @ LastRefactor: Jan/06/2010
+      # @ Devs:
+      #     Moski
+      #     Ahmad
+      #######################################################
       def setTitle(action_name , media_id  , title ,options = {})
-        setup_what_how(action_name , options)
-        options.merge!(:media_id => media_id)
+        # using PUT method allows us to update without
+        # specifying an action name, since it's a RESTful route
+        setup_what_how("" , options)
+        options.merge!(:method => "put")
+        options.merge!(:id => media_id)
         options.merge!(:title => CGI.escape(title))
+        
         return send_request(options)
       end
-      
+
+      #######################################################
+      # Modifies caption of specified media that belongs to the 
+      # logged in user.
+      #######################################################
+      # @ LastRefactor: Jan/06/2010
+      # @ Devs:
+      #     Moski
+      #     Ahmad
+      #######################################################      
       def setCaption(action_name,media_id  , caption ,options = {})
-        setup_what_how(action_name , options)
-        options.merge!(:media_id => media_id)
+        setup_what_how("", options)
+        options.merge!(:id => media_id)
         options.merge!(:caption => CGI.escape(caption))
+        options.merge!(:method => "put")
+        
         return send_request(options)
       end
       
-      def setFavorite(action_name, media_id  , favorite = 'yes' ,options = {})
-        setup_what_how(action_name , options)
-        options.merge!(:media_id => media_id)
-        options.merge!(:favorite => favorite)
+      # DEPRECATED
+      #def setFavorite(action_name, media_id  , favorite = 'yes' ,options = {})
+      #  setup_what_how(action_name , options)
+      #  options.merge!(:media_id => media_id)
+      #  options.merge!(:favorite => favorite)
+      #  return send_request(options)
+      #end
+      
+      #######################################################
+      # Adds 1 tag at a time to media.
+      # NOTE:
+      #   trying to add more than one tag using a ' ' space delimiter
+      #   will result in an escaped '+' character instead. 
+      #######################################################
+      # @ LastRefactor: Jan/06/2010
+      # @ Devs:
+      #     Moski
+      #     Ahmad
+      #######################################################
+      def addTag(action_name, media_id  , tags  ,options = {})
+        setup_what_how("add_tag", options)
+        options.merge!(:id => media_id)
+        options.merge!(:tag => CGI.escape(tags))
+        options.merge!(:method => "put")
+        
         return send_request(options)
       end
       
-      def addTags(action_name, media_id  , tags  ,options = {})
-        setup_what_how(action_name , options)
-        options.merge!(:media_id => media_id)
-        options.merge!(:tags => CGI.escape(tags))
-        return send_request(options)
-      end
-      
+      #######################################################
+      # Removes all occurences of 'tag' in media's tags.
+      #######################################################
+      # @ LastRefactor: Jan/06/2010
+      # @ Devs:
+      #     Moski
+      #     Ahmad
+      #######################################################
       def removeTag(action_name, media_id  , tag  ,options = {})
-        setup_what_how(action_name , options)
-        options.merge!(:media_id => media_id)
+        setup_what_how("remove_tag" , options)
+        options.merge!(:id => media_id)
         options.merge!(:tag => CGI.escape(tag))
+        options.merge!(:method => "put")
+        
         return send_request(options)
       end
-      
-      
       
       
       #######################################################
@@ -136,6 +253,7 @@ module Ikbis
       # @Author  : Moski
       #######################################################
       def setup_what_how(action_name , options)
+        options.merge!(:target => "medias")
         options.merge!(:what => action_name)
         options.merge!(:how => 'xml') unless options.has_key?(:how)
       end

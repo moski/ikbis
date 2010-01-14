@@ -1,7 +1,8 @@
 require 'rubygems'
 require 'httparty'
 require 'cgi'
-
+require 'net/http'
+require 'net/http/post/multipart'
 require 'oauth/consumer'
 require 'yaml'
 

@@ -7,7 +7,7 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |s|
     s.name = "ikbis"
-    s.summary = "TODO"
+    s.summary = "FUBAR"
     s.email = "abushaikh@gmail.com"
     s.homepage = "http://github.com/moski/ikbis"
     s.description = "TODO"

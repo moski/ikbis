@@ -2,21 +2,23 @@ module Ikbis
   module Simple
 
     class Video < Ikbis::Simple::Base
-
+      
+      base_uri "#{Base.base_uri}/medias"
+      
       def self.info(id, response='xml')
-        get("/video/info/#{id}/#{response}")
+        get("/#{id}.#{response}")
       end
 
       def self.comments(id, response='xml')
-        get("/video/comments/#{id}/#{response}")
+        get("/#{id}/comments.#{response}")
       end
 
-      def self.in_category(category, response='xml', page=1)
-        get("/video/in_category/#{category}/#{response}?page=#{page}")
+      def self.in_category(id, response='xml', page=1)
+        get("/#{id}/category_medias.#{response}?page=#{page}&type=Video")
       end
 
       def self.has_tag(tag, response='xml', page=1)
-        get("/video/has_tag/#{tag}/#{response}?page=#{page}")
+        get("#{Base.base_uri}/search/#{tag}/tags.#{response}?page=#{page}&type=Video")
       end
     end
   end
