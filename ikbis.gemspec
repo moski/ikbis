@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.authors = ["Moski Doski"]
   s.date = %q{2010-01-14}
   s.default_executable = %q{ikbis-auth}
-  s.description = %q{TODO}
+  s.description = %q{This gem implements a full-featured ruby interface for the Ikbis API.}
   s.email = %q{abushaikh@gmail.com}
   s.executables = ["ikbis-auth"]
   s.extra_rdoc_files = [
@@ -48,7 +48,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.5}
-  s.summary = %q{FUBAR}
+  s.summary = %q{This gem implements a full-featured ruby interface for the Ikbis API.}
   s.test_files = [
     "test/ikbis_test.rb",
      "test/test_helper.rb"
@@ -59,8 +59,17 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<multipart-post>, [">= 1.0"])
+      s.add_runtime_dependency(%q<httparty>, [">= 0.5.0"])
+      s.add_runtime_dependency(%q<oauth>, [">= 0.3.6"])
     else
+      s.add_dependency(%q<multipart-post>, [">= 1.0"])
+      s.add_dependency(%q<httparty>, [">= 0.5.0"])
+      s.add_dependency(%q<oauth>, [">= 0.3.6"])
     end
   else
+    s.add_dependency(%q<multipart-post>, [">= 1.0"])
+    s.add_dependency(%q<httparty>, [">= 0.5.0"])
+    s.add_dependency(%q<oauth>, [">= 0.3.6"])
   end
 end

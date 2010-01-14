@@ -7,11 +7,14 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |s|
     s.name = "ikbis"
-    s.summary = "FUBAR"
+    s.summary = "This gem implements a full-featured ruby interface for the Ikbis API."
     s.email = "abushaikh@gmail.com"
     s.homepage = "http://github.com/moski/ikbis"
-    s.description = "TODO"
+    s.description = "This gem implements a full-featured ruby interface for the Ikbis API."
     s.authors = ["Moski Doski"]
+    s.add_dependency('multipart-post', '>= 1.0')
+    s.add_dependency('httparty', '>= 0.5.0')
+    s.add_dependency('oauth', '>= 0.3.6')
   end
 rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
